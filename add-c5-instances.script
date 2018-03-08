@@ -1,0 +1,9 @@
+var dataCenters = new GlideRecord('cmdb_ci_aws_datacenter');
+dataCenters.query();
+
+while(dataCenters.next()){
+var dataCenterSysID = dataCenters.sys_id.toString();
+
+var inputPayload = '{"items":[{"className":"cmdb_ci_aws_datacenter","values":{"sys_id":"' + dataCenterSysID + '","discovery_source":"ServiceNow"},"lookup":[],"related":[]},{"className":"cmdb_ci_compute_template","values":{"local_storage_gb":"0","discovery_source":"ServiceNow","name":"c5.large","memory_mb":"4","vcpus":"2","object_id":"c5.large"},"lookup":[],"related":[]},{"className":"cmdb_ci_compute_template","values":{"local_storage_gb":"0","discovery_source":"ServiceNow","name":"c5.xlarge","memory_mb":"8","vcpus":"4","object_id":"c5.xlarge"},"lookup":[],"related":[]},{"className":"cmdb_ci_compute_template","values":{"local_storage_gb":"0","discovery_source":"ServiceNow","name":"c5.2xlarge","memory_mb":"16","vcpus":"8","object_id":"c5.2xlarge"},"lookup":[],"related":[]},{"className":"cmdb_ci_compute_template","values":{"local_storage_gb":"0","discovery_source":"ServiceNow","name":"c5.4xlarge","memory_mb":"32","vcpus":"16","object_id":"c5.4xlarge"},"lookup":[],"related":[]},{"className":"cmdb_ci_compute_template","values":{"local_storage_gb":"0","discovery_source":"ServiceNow","name":"c5.9xlarge","memory_mb":"72","vcpus":"36","object_id":"c5.9xlarge"},"lookup":[],"related":[]},{"className":"cmdb_ci_compute_template","values":{"local_storage_gb":"0","discovery_source":"ServiceNow","name":"c5.18xlarge","memory_mb":"144","vcpus":"72","object_id":"c5.18xlarge"},"lookup":[],"related":[]}],"relations":[{"parent":1,"child":0,"type":"Hosted on::Hosts"},{"parent":2,"child":0,"type":"Hosted on::Hosts"},{"parent":3,"child":0,"type":"Hosted on::Hosts"},{"parent":4,"child":0,"type":"Hosted on::Hosts"},{"parent":5,"child":0,"type":"Hosted on::Hosts"},{"parent":6,"child":0,"type":"Hosted on::Hosts"}]}';
+
+SNC.IdentificationEngineScriptableApi.createOrUpdateCI('ServiceNow',inputPayload); } 

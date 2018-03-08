@@ -1,0 +1,10 @@
+var dataCenters = new GlideRecord('cmdb_ci_aws_datacenter');
+dataCenters.query();
+
+while(dataCenters.next()){
+var dataCenterSysID = dataCenters.sys_id.toString();
+
+var inputPayload = '{"items":[{"className":"cmdb_ci_aws_datacenter","values":{"sys_id":"' + dataCenterSysID + '","discovery_source":"ServiceNow"},"lookup":[],"related":[]},{"className":"cmdb_ci_compute_template","values":{"local_storage_gb":"0","discovery_source":"ServiceNow","name":"p3.2xlarge","memory_mb":"61","vcpus":"8","object_id":"p3.2xlarge"},"lookup":[],"related":[]},{"className":"cmdb_ci_compute_template","values":{"local_storage_gb":"0","discovery_source":"ServiceNow","name":"p3.8xlarge","memory_mb":"244","vcpus":"32","object_id":"p3.8xlarge"},"lookup":[],"related":[]},{"className":"cmdb_ci_compute_template","values":{"local_storage_gb":"0","discovery_source":"ServiceNow","name":"p3.16xlarge","memory_mb":"488","vcpus":"64","object_id":"p3.16xlarge"},"lookup":[],"related":[]}],"relations":[{"parent":1,"child":0,"type":"Hosted on::Hosts"},{"parent":2,"child":0,"type":"Hosted on::Hosts"},{"parent":3,"child":0,"type":"Hosted on::Hosts"}]}';
+
+SNC.IdentificationEngineScriptableApi.createOrUpdateCI('ServiceNow',inputPayload);
+}
